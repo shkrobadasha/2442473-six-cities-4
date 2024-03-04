@@ -1,7 +1,7 @@
 //сделать компонент для отбражения 1 карточки
 //в мейн добавить нестатичные карточки и наполнять их данными
 
-import { PlaceInfo } from '../../../constInformation/placeInfo';
+import { PlaceInfo } from '../../const-information/place-info';
 
 function PlaceCard(props: PlaceInfo): JSX.Element {
   return (
