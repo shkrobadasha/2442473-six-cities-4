@@ -1,11 +1,14 @@
-import PlaceCard from '../../components/place-card/place-card';
+import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Logo from '../../components/logo/logo';
+import { Offers } from '../../types/offer';
+import { Link } from 'react-router-dom';
 
 type MainScreenProps = {
   placesToVisit: number;
+  offers: Offers;
 }
 
-function MainScreen(props: MainScreenProps):JSX.Element{
+function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
   return(
     <div className="page page--gray page--main">
       <header className="header">
@@ -21,7 +24,9 @@ function MainScreen(props: MainScreenProps):JSX.Element{
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <Link to="/favorites">
+                      <span className="header__favorite-count">3</span>
+                    </Link>
                   </a>
                 </li>
                 <li className="header__nav-item">
@@ -77,7 +82,7 @@ function MainScreen(props: MainScreenProps):JSX.Element{
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {props.placesToVisit} places to stay in Amsterdam</b>
+              <b className="places__found"> {placesToVisit} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -93,53 +98,7 @@ function MainScreen(props: MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard
-                  premium
-                  photo = {'img/apartment-01.jpg'}
-                  costPerNight = {120}
-                  favourites = {false}
-                  rating={4}
-                  title={'Beautiful; luxurious apartment at great location'}
-                  type={'Apartment'}
-                />
-                <PlaceCard
-                  premium = {false}
-                  photo = {'img/room.jpg'}
-                  costPerNight = {80}
-                  favourites
-                  rating={4}
-                  title={'Wood and stone place'}
-                  type={'Room'}
-                />
-                <PlaceCard
-                  premium = {false}
-                  photo = {'img/apartment-02.jpg'}
-                  costPerNight = {132}
-                  favourites = {false}
-                  rating={4}
-                  title={'Canal View Prinsengracht'}
-                  type={'Apartment'}
-                />
-                <PlaceCard
-                  premium
-                  photo = {'img/apartment-03.jpg'}
-                  costPerNight = {180}
-                  favourites = {false}
-                  rating={4}
-                  title={'Nice, cozy, warm big bed apartment'}
-                  type={'Apartment'}
-                />
-                <PlaceCard
-                  premium = {false}
-                  photo = {'img/room.jpg'}
-                  costPerNight = {80}
-                  favourites
-                  rating={4}
-                  title={'Wood and stone place'}
-                  type={'Room'}
-                />
-              </div>
+              <PlacesCardList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
