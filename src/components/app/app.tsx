@@ -8,20 +8,22 @@ import NotFoundScreen from '../../pages/not-found/not-found';
 import PrivateRoute from '../../components/private-route/private-route';
 import { AuthorizationStatus } from '../../const-information/constant';
 import { HelmetProvider } from 'react-helmet-async';
-
+import { Offers } from '../../types/offer';
 
 type AppScreenProps = {
   placesToVisit: number;
+  offers: Offers;
 }
 
-function App({placesToVisit}: AppScreenProps): JSX.Element{
+function App({placesToVisit, offers}: AppScreenProps): JSX.Element{
+  const favourite = offers.filter((o) => o.favourites);
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<Main placesToVisit = {placesToVisit} />}
+            element={<Main placesToVisit = {placesToVisit} offers = {offers} />}
           />
           <Route
             path={AppRoute.Login}
@@ -31,9 +33,9 @@ function App({placesToVisit}: AppScreenProps): JSX.Element{
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+                authorizationStatus={AuthorizationStatus.Auth}
               >
-                <Favorites/>
+                <Favorites favoriteOffers = {favourite} />
               </PrivateRoute>
             }
           />
