@@ -16,7 +16,7 @@ type AppScreenProps = {
 }
 
 function App({placesToVisit, offers}: AppScreenProps): JSX.Element{
-  const favourite = offers.filter((o) => o.favourites);
+  const favourite = offers.filter((o) => o.isFavorite);
   return (
     <HelmetProvider>
       <BrowserRouter>

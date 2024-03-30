@@ -1,75 +1,96 @@
-import {Offers} from '../types/offer';
-import { reviews } from './reviews';
+import { Offer } from '../types/offer';
 
-export const offers: Offers = [
+export const offers: Offer[] = [
   {
-    id: 1,
-    hotel: {
-      addres: 'Street 3',
-      number: '89328439212',
-      img: 'img-of-hall'
+    id: '1',
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment',
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
     },
-    city: 'Amsterdam',
-    premium: true,
-    images: 'img-of-hottel',
-    costPerNight: 123,
-    favourites: true,
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
+    isFavorite: true,
+    isPremium: true,
     rating: 4,
-    title: 'Castle Of Luxury Pleasures',
-    type: 'Apartment',
-    review: [reviews[0]]
+    previewImage: 'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg'
   },
   {
-    id: 2,
-    hotel: {
-      addres: 'Street 43',
-      number: '63736213221',
-      img: 'img-of-halls'
+    id: '2',
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment',
+    price: 80,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
     },
-    city: 'New York',
-    premium: true,
-    images: 'img-of-hotel',
-    costPerNight: 2300,
-    favourites: false,
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
+    isFavorite: false,
+    isPremium: false,
     rating: 5,
-    title: 'Imperial Splendor Hotel',
-    type: 'Apartment',
-    review: [reviews[1]]
+    previewImage: 'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg'
   },
   {
-    id: 3,
-    hotel: {
-      addres: '5 Vetrov Lane',
-      number: '13734218221',
-      img: 'img01'
+    id: '3',
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment',
+    price: 1200,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
     },
-    city: 'Paris',
-    premium: false,
-    images: 'img-of-hotel',
-    costPerNight: 80,
-    favourites: false,
-    rating: 4,
-    title: 'Grand Palace Boutique Hotel',
-    type: 'Apartment',
-    review: [reviews[2]]
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 3,
+    previewImage: 'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg'
   },
   {
-    id: 4,
-    hotel: {
-      addres: 'Severinstr. 199, Германия, Кёльн',
-      number: '37354218221',
-      img: 'img02'
+    id: '4',
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment',
+    price: 200,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
     },
-    city: 'Cologne',
-    premium: false,
-    images: 'img-of-hotel',
-    costPerNight: 105,
-    favourites: true,
-    rating: 4,
-    title: 'Mercure Hotel Severinshof Köln City',
-    type: 'Apartment',
-    review: [reviews[3]]
-  }
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 5,
+    previewImage: 'https://w.forfun.com/fetch/85/85ae14568a42dcfeb55be68307d1a797.jpeg'
+  },
 ];
-
-
