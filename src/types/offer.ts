@@ -1,27 +1,25 @@
-import {Review} from '../types/review';
-
-export type Hotel = {
-  addres: string;
-  number: string;
-  img: string;
+export type Offer = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: City;
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: 1 | 2 | 3 | 4 | 5;
+  previewImage: string;
 };
 
-
-export type Offer = {
-  id: number;
-  hotel: Hotel;
-  city: string;
-  premium: boolean;
-  images: string;
-  costPerNight: number;
-  favourites: boolean;
-  rating: 1 | 2 | 3 | 4 | 5;
-  title: string;
-  type: 'Apartment' | 'Room' | 'House' | 'Hotel';
-  review: Review[];
-
-
+export type City = {
+  name: string;
+  location: Location;
 }
 
-export type Offers = Offer[];
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+};
 
+export type Offers = Offer[];
