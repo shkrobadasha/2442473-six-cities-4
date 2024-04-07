@@ -1,5 +1,5 @@
 export const Settings = {
-  PlacesToVisit: 312
+  PlacesToVisit: 4
 };
 
 export enum AppRoute {
@@ -15,3 +15,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN', //статус по умолчанию (промежуточный статус)
 }
 
+export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
+export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';

@@ -2,6 +2,7 @@ import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Logo from '../../components/logo/logo';
 import { Offers } from '../../types/offer';
 import { Link } from 'react-router-dom';
+import Map from '../../components/map/map';
 
 type MainScreenProps = {
   placesToVisit: number;
@@ -100,9 +101,9 @@ function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
               </form>
               <PlacesCardList offers={offers} />
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+            <section className="cities__map map">
+              <Map city={offers[0].city} points={offers} selectedPoint={undefined}/>
+            </section>
           </div>
         </div>
       </main>
