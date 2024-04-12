@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 
 type OfferInfo = {
   offer: Offer;
+  typeOfCard: 'nearest' | 'defoult';
 }
 
-function PlaceCard({offer}:OfferInfo): JSX.Element {
+function PlaceCard({offer, typeOfCard}:OfferInfo): JSX.Element {
   return (
-    <article className ="cities__card place-card">
+    <article className = {`${typeOfCard === 'nearest' ? 'nearest__card place-card' : 'cities__card place-card'}`}>
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

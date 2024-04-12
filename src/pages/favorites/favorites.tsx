@@ -48,7 +48,6 @@ function Favorites({favoriteOffers}:FavoriteOffer): JSX.Element {
           </div>
         </div>
       </header>
-
       <main className ="page__main page__main--favorites">
         <div className ="page__favorites-container container">
           <section className ="favorites">
@@ -65,7 +64,7 @@ function Favorites({favoriteOffers}:FavoriteOffer): JSX.Element {
                   </div>
                   <div className="favorites__places">
                     {favouriteOffersMap[city].map((offer) => (
-                      <PlaceCard key={offer.id} offer={offer}></PlaceCard>
+                      <PlaceCard key={offer.id} offer={offer} typeOfCard = {'defoult'}></PlaceCard>
                     ))}
                   </div>
                 </li>

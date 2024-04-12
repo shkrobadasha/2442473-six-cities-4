@@ -99,7 +99,7 @@ function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlacesCardList offers={offers} />
+              <PlacesCardList offers={offers} typeOfList = {'defoult'} />
             </section>
             <section className="cities__map map">
               <Map city={offers[0].city} points={offers} selectedPoint={undefined}/>

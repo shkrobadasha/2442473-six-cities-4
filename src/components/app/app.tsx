@@ -9,13 +9,17 @@ import PrivateRoute from '../../components/private-route/private-route';
 import { AuthorizationStatus } from '../../const-information/constant';
 import { HelmetProvider } from 'react-helmet-async';
 import { Offers } from '../../types/offer';
+import { Reviews } from '../../types/review';
+
 
 type AppScreenProps = {
   placesToVisit: number;
   offers: Offers;
+  reviews: Reviews;
+
 }
 
-function App({placesToVisit, offers}: AppScreenProps): JSX.Element{
+function App({placesToVisit, offers, reviews}: AppScreenProps): JSX.Element{
   const favourite = offers.filter((o) => o.isFavorite);
   return (
     <HelmetProvider>
@@ -23,7 +27,7 @@ function App({placesToVisit, offers}: AppScreenProps): JSX.Element{
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<Main placesToVisit = {placesToVisit} offers = {offers} />}
+            element={<Main placesToVisit = {placesToVisit} offers = {offers}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -40,8 +44,8 @@ function App({placesToVisit, offers}: AppScreenProps): JSX.Element{
             }
           />
           <Route
-            element={<Offer />}
             path={AppRoute.Offer}
+            element={<Offer reviews={reviews}/>}
           />
           <Route
             path="*"
