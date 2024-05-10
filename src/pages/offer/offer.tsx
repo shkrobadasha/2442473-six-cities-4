@@ -6,12 +6,14 @@ import { offers} from '../../mocks/offers';
 import ReviewsList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
 import PlaceCard from '../../components/place-card-list/place-card-list';
+import { Offers } from '../../types/offer';
 
 type OfferProps = {
   reviews: Reviews;
+  favorites: Offers;
 
 }
-function Offer({reviews}: OfferProps): JSX.Element {
+function Offer({reviews, favorites}: OfferProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -28,7 +30,7 @@ function Offer({reviews}: OfferProps): JSX.Element {
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <Link to="/favorites">
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </a>
                 </li>
@@ -170,7 +172,7 @@ function Offer({reviews}: OfferProps): JSX.Element {
           </div>
 
           <section className="offer__map map">
-            <Map city={offers[0].city} points={offers.slice(0, 3)} selectedPoint={undefined}/>
+            <Map city={offers[0].city} points={offers.slice(0, 3)} />
           </section>
         </section>
         <div className="container">
