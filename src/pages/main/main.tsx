@@ -1,15 +1,31 @@
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import PlacesCardList from '../../components/place-card-list/place-card-list';
+import Map from '../../components/map/map';
 import Logo from '../../components/logo/logo';
 import { Offers } from '../../types/offer';
-import { Link } from 'react-router-dom';
-import Map from '../../components/map/map';
+import { useState } from 'react';
+import CitiesList from '../../components/list-cities/list-cities';
+import { Cities } from '../../const-information/constant';
+import { useAppSelector } from '../../hooks';
 
 type MainScreenProps = {
-  placesToVisit: number;
-  offers: Offers;
+  favorites: Offers;
 }
 
-function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
+function MainScreen({favorites}: MainScreenProps):JSX.Element{
+  const offers = useAppSelector((state) => state.offers);
+  const city = useAppSelector((state) => state.city);
+
+  const [currentCityOffers, setCurrentCityOffers] = useState<Offers>(offers);
+
+  useEffect(() => {
+    const filteredOffers = offers.filter((offer) => offer.city.name === city);
+    setCurrentCityOffers(filteredOffers);
+  }, [city, offers]);
+
+
   return(
     <div className="page page--gray page--main">
       <header className="header">
@@ -24,9 +40,9 @@ function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <Link to="/favorites">
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </a>
                 </li>
@@ -42,48 +58,17 @@ function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
       </header>
 
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
+        <h1 className="visually-hidden">citiesName</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList cities ={Cities} />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found"> {placesToVisit} places to stay in Amsterdam</b>
+              <b className="places__found">{`${currentCityOffers.length} places to stay in ${city}`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -99,10 +84,11 @@ function MainScreen({placesToVisit, offers}: MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlacesCardList offers={offers} typeOfList = {'defoult'} />
+              <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
             </section>
             <section className="cities__map map">
-              <Map city={offers[0].city} points={offers} selectedPoint={undefined}/>
+              <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers}/>
+
             </section>
           </div>
         </div>
