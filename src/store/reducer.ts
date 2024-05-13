@@ -1,18 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { cityChangs } from './action';
-import { offerListFilling } from './action';
+import { cityChangs, offerListFilling, sortingSelection} from './action';
 import { offers } from '../mocks/offers';
-import { Offers } from '../types/offer';
-//в стейте описываем начальное состояние (город и список предложений по аренде)
-// функцию, которая принимает стейт и действие
+import { Offers} from '../types/offer';
+
 type StateType = {
   city: string;
   offers: Offers;
-}
+  sortOption: string;
+};
+
 
 const initialState: StateType = {
   city: 'Paris',
-  offers: offers
+  offers: offers,
+  sortOption: 'Popular',
+
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -22,5 +24,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(offerListFilling, (state) =>{
       state.offers = offers;
+    })
+    .addCase(sortingSelection, (state, action) => {
+      state.sortOption = action.payload;
+
     });
 });

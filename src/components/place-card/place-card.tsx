@@ -1,14 +1,25 @@
+//import { useAppDispatch } from '../../hooks';
+//import { selectAndMarkerPoint } from '../../store/action';
 import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 
 type OfferInfo = {
   offer: Offer;
   typeOfCard: 'nearest' | 'defoult';
+  onCardMouseOver(id:number): void;
 }
 
-function PlaceCard({offer, typeOfCard}:OfferInfo): JSX.Element {
+function PlaceCard({offer, typeOfCard, onCardMouseOver}:OfferInfo): JSX.Element {
+  //const dispatch = useAppDispatch();
+
   return (
-    <article className = {`${typeOfCard === 'nearest' ? 'nearest__card place-card' : 'cities__card place-card'}`}>
+    <article className = {`${typeOfCard === 'nearest' ? 'nearest__card place-card' : 'cities__card place-card'}`}
+      id ={offer.id.toString()}
+      onMouseOver={(evt)=> {
+        const target = evt.currentTarget as HTMLElement;
+        onCardMouseOver(+target.id);
+      }}
+    >
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
