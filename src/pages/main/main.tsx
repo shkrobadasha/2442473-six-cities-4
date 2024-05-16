@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../hooks';
 
 import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Map from '../../components/map/map';
 import Logo from '../../components/logo/logo';
 import { Offers } from '../../types/offer';
-import { useState } from 'react';
 import CitiesList from '../../components/list-cities/list-cities';
 import { Cities } from '../../const-information/constant';
-import { useAppSelector } from '../../hooks';
+import SortingOptions from '../../components/sorting-options/sorting-options';
 
 type MainScreenProps = {
   favorites: Offers;
@@ -69,21 +69,7 @@ function MainScreen({favorites}: MainScreenProps):JSX.Element{
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{`${currentCityOffers.length} places to stay in ${city}`}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
+              <SortingOptions/>
               <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
             </section>
             <section className="cities__map map">
