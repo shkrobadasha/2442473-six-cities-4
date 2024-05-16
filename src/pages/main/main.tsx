@@ -24,7 +24,6 @@ function MainScreen({favorites}: MainScreenProps):JSX.Element{
     const filteredOffers = offers.filter((offer) => offer.city.name === city);
     setCurrentCityOffers(filteredOffers);
   }, [city, offers]);
-  const [selectedPoint, setSelectedPoint] = useState(0);
 
 
   return(
@@ -71,10 +70,10 @@ function MainScreen({favorites}: MainScreenProps):JSX.Element{
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{`${currentCityOffers.length} places to stay in ${city}`}</b>
               <SortingOptions/>
-              <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'} setSelectedPoint = {setSelectedPoint}/>
+              <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
             </section>
             <section className="cities__map map">
-              <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers} selectedPoint={selectedPoint} />
+              <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers}/>
 
             </section>
           </div>

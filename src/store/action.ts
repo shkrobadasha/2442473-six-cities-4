@@ -7,4 +7,5 @@ export const offerListFilling = createAction('offer/offerListFilling');
 
 export const sortingSelection = createAction<string>('sorting/selectOptionSorting');
 
+export const colorSelectPoint = createAction<string | null>('points/selectPoint');
 
