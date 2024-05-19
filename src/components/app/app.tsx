@@ -10,18 +10,28 @@ import { AuthorizationStatus } from '../../const-information/constant';
 import { HelmetProvider } from 'react-helmet-async';
 import { Reviews } from '../../types/review';
 import { Offers } from '../../types/offer';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { offerListFilling } from '../../store/action';
+import { useAppSelector } from '../../hooks';
+
+import LoadingScreen from '../loading-screen/loading-screen';
+
 type AppScreenProps = {
   reviews: Reviews;
 }
 
 function App({reviews}: AppScreenProps): JSX.Element{
-
   const offers: Offers = useAppSelector((state) => state.offers);
-  const dispatch = useAppDispatch();
-  dispatch(offerListFilling);
+
+  const authorizationStatus = useAppSelector((state) => state.AuthorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOfferataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+    return (
+      <LoadingScreen/>
+    );
+  }
+
   const favourites = offers.filter((o) => o.isFavorite);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
