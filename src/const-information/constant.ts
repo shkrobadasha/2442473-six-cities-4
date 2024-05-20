@@ -8,6 +8,11 @@ export enum AppRoute {
   Main = '/'
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -45,3 +50,7 @@ export const Cities = [
     id: 6,
   },
 ];
+
+export const TIMEOUT_SHOW_ERROR = 2000;
+
+
