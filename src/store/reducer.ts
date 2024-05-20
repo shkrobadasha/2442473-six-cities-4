@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { cityChangs, sortingSelection, colorSelectPoint, loadOffers, setOffersDataLoadingStatus, requireAuthorization, setError} from './action';
+import { cityChangs, sortingSelection, colorSelectPoint, loadOffers, setOffersDataLoadingStatus, requireAuthorization, setError, setLogin} from './action';
 import { Offers} from '../types/offer';
 import { AuthorizationStatus } from '../const-information/constant';
 
@@ -11,6 +11,7 @@ type StateType = {
   AuthorizationStatus: AuthorizationStatus;
   isOfferataLoading: boolean;
   error: string | null;
+  login: string | null;
 };
 
 
@@ -22,6 +23,7 @@ const initialState: StateType = {
   AuthorizationStatus: AuthorizationStatus.Unknown,
   isOfferataLoading: false,
   error: null,
+  login:null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -46,5 +48,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setLogin, (state, action) => {
+      state.login = action.payload;
+
     });
 });

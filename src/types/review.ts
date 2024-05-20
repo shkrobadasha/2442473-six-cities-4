@@ -1,6 +1,6 @@
 export type User = {
   name: string;
-  avatarUrl: string;
+  avatar: string;
   isPro: boolean;
 }
 
@@ -9,7 +9,7 @@ export type Review = {
   date: string;
   user: User;
   comment: string;
-  rating: 1 | 2 | 3 | 4 | 5;
+  rating: number;
 }
 
 export type Reviews = Review[];
