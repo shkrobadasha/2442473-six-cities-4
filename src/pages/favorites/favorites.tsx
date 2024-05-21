@@ -1,4 +1,3 @@
-//import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 import {Offers} from '../../types/offer';
 import PlaceCard from '../../components/place-card/place-card';

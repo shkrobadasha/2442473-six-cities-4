@@ -1,9 +1,10 @@
+//модуль с ассинхронными действиями
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.ts';
 import {AxiosInstance} from 'axios';
 import {Offer} from '../types/offer.ts';
-import {loadOffers, requireAuthorization, setOffersDataLoadingStatus, setError, setLogin} from './action.ts';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const-information/constant.ts';
+import {loadOffers, requireAuthorization, setOffersDataLoadingStatus, setError, setLogin, redirectToRoute} from './action.ts';
+import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const-information/constant.ts';
 
 import {dropToken, saveToken } from '../service/token.ts';
 import { UserData } from '../types/user-data.ts';
@@ -20,7 +21,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));
+    dispatch(loadOffers(data));//помещает наши данные в хранилище
   },
 );
 
@@ -51,6 +52,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     dispatch(setLogin(email));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
+
   },
 );
 
