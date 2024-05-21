@@ -5,8 +5,6 @@ import { AuthorizationStatus } from '../const-information/constant';
 
 export const cityChangs = createAction<string>('city/cityChangs');
 
-//export const offerListFilling = createAction('offer/offerListFilling');
-
 export const sortingSelection = createAction<string>('sorting/selectOptionSorting');
 
 export const colorSelectPoint = createAction<string | null>('points/selectPoint');
@@ -19,4 +17,4 @@ export const requireAuthorization = createAction<AuthorizationStatus>('requireAu
 
 export const setError = createAction<string | null>('setError');
 
-
+export const setLogin = createAction<string|null>('authorization/setLogin');

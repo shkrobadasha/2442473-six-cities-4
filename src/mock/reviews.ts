@@ -7,7 +7,7 @@ export const reviews: Review[] = [
     date: '2019-05-08T14:13:56.569Z',
     user: {
       name: 'Oliver Conner',
-      avatarUrl: 'https://url-to-image/image.png',
+      avatar: 'https://url-to-image/image.png',
       isPro: false
     },
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
@@ -18,7 +18,7 @@ export const reviews: Review[] = [
     date: '2014-11-04T11:13:46.569Z',
     user: {
       name: 'Daria Conner',
-      avatarUrl: 'https://url-to-image/image.png',
+      avatar: 'https://url-to-image/image.png',
       isPro: true
     },
     comment: 'Very good.',
