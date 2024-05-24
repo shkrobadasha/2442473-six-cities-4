@@ -9,7 +9,7 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
-  comments = '/comments'
+  Comments = '/comments'
 }
 export enum AuthorizationStatus {
   Auth = 'AUTH',
