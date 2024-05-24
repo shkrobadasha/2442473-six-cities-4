@@ -15,7 +15,7 @@ function PlaceCard({offer, typeOfCard}:OfferInfo): JSX.Element {
 
   return (
     <article className = {`${typeOfCard === 'nearest' ? 'nearest__card place-card' : 'cities__card place-card'}`}
-      onMouseOver={() => dispatch(colorSelectPoint(offer.id))}
+      onMouseOver={() => dispatch(colorSelectPoint({ id: offer.id }))}
       onMouseLeave={() => dispatch(colorSelectPoint(null))}
       onClick={() => window.scrollTo(0, 0)}
     >
