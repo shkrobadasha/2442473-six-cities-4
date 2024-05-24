@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Main from '../../pages/main/main';
 import {AppRoute} from '../../const-information/constant';
 import Login from '../../pages/login/login';
@@ -8,17 +8,14 @@ import NotFoundScreen from '../../pages/not-found/not-found';
 import PrivateRoute from '../../components/private-route/private-route';
 import { AuthorizationStatus } from '../../const-information/constant';
 import { HelmetProvider } from 'react-helmet-async';
-import { Reviews } from '../../types/review';
 import { Offers } from '../../types/offer';
 import { useAppSelector } from '../../hooks';
+import HistoryRouter from '../../browser/history-router/history-router';
+import browserHistory from '../../browser/browser-history/browser-history';
+import LoadingScreen from '../../pages/loading/loading';
 
-import LoadingScreen from '../loading-screen/loading-screen';
 
-type AppScreenProps = {
-  reviews: Reviews;
-}
-
-function App({reviews}: AppScreenProps): JSX.Element{
+function App(): JSX.Element{
   const offers: Offers = useAppSelector((state) => state.offers);
 
   const authorizationStatus = useAppSelector((state) => state.AuthorizationStatus);
@@ -34,7 +31,7 @@ function App({reviews}: AppScreenProps): JSX.Element{
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -56,14 +53,14 @@ function App({reviews}: AppScreenProps): JSX.Element{
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer reviews={reviews} favorites={favourites}/>}
+            element={<Offer favorites={favourites}/>}
           />
           <Route
             path="*"
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

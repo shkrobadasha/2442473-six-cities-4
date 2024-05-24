@@ -1,9 +1,7 @@
-//import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Map from '../../components/map/map';
-//import Logo from '../../components/logo/logo';
 import { Offers } from '../../types/offer';
 import CitiesList from '../../components/list-cities/list-cities';
 import { Cities } from '../../const-information/constant';
@@ -46,7 +44,7 @@ function MainScreen({favorites}: MainScreenProps):JSX.Element{
               <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
             </section>
             <section className="cities__map map">
-              <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers}/>
+              <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers} specialCaseId={undefined}/>
 
             </section>
           </div>
