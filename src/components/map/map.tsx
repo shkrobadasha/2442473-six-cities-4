@@ -6,6 +6,7 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const-information/
 import { City, Points } from '../../types/offer';
 import { useAppSelector } from '../../hooks';
 import {Icon, layerGroup, Marker} from 'leaflet';
+import { getselectPoint } from '../../store/offer-process/selectors';
 
 type mapData = {
   city: City;
@@ -30,7 +31,7 @@ function Map({city, points, specialCaseId}: mapData): JSX.Element {
   const map = useMap(mapRef, city);
 
   const selectPoint: null | { id: string } = useAppSelector(
-    (state) => state.selectPoint
+    getselectPoint
   );
 
   useEffect(() => {

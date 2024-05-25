@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
 import { AppRoute, AuthorizationStatus } from '../../const-information/constant.ts';
 import { logoutAction } from '../../store/api-actions.ts';
 import Logo from '../logo/logo.tsx';
+import { getAuthorizationStatus, getuserEmail } from '../../store/user-process/selectors.ts';
 
 
 type HeaderProps = {
@@ -12,8 +13,8 @@ type HeaderProps = {
 
 function Header({favorites}: HeaderProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.AuthorizationStatus);
-  const login = useAppSelector((state) => state.login);
+  const user = useAppSelector(getAuthorizationStatus);
+  const userEmail = useAppSelector(getuserEmail);
   const handleSignOut = () => {
     dispatch(logoutAction());
   };
@@ -35,7 +36,7 @@ function Header({favorites}: HeaderProps): JSX.Element {
                   </div>
                   {user === AuthorizationStatus.Auth ? (
                     <Link to= {AppRoute.Favorites}>
-                      <span className="header__user-name user__name">{login}</span>
+                      <span className="header__user-name user__name">{userEmail}</span>
                       <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   ) : (

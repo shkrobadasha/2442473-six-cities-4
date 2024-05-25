@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useMemo} from 'react';
 import { useAppSelector } from '../../hooks';
 import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Map from '../../components/map/map';
@@ -7,22 +7,21 @@ import CitiesList from '../../components/list-cities/list-cities';
 import { Cities } from '../../const-information/constant';
 import SortingOptions from '../../components/sorting-options/sorting-options';
 import Header from '../../components/header/header';
+import { getCity } from '../../store/other-process/selectors';
+import { getOffers } from '../../store/offer-process/selectors';
 
 type MainScreenProps = {
   favorites: Offers;
 }
 
 function MainScreen({favorites}: MainScreenProps):JSX.Element{
-  const offers = useAppSelector((state) => state.offers);
-  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector(getOffers);
+  const city = useAppSelector(getCity);
 
-  const [currentCityOffers, setCurrentCityOffers] = useState<Offers>(offers);
-
-  useEffect(() => {
-    const filteredOffers = offers.filter((offer) => offer.city.name === city);
-    setCurrentCityOffers(filteredOffers);
-  }, [city, offers]);
-
+  const currentCityOffers = useMemo(
+    () => offers.filter((offer) => offer.city.name === city),
+    [offers, city]
+  );
 
   return(
     <div className="page page--gray page--main">
