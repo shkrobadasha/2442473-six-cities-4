@@ -1,5 +1,7 @@
+import { memo } from 'react';
 import {useAppDispatch} from '../../hooks';
-import {cityChangs} from '../../store/action';
+import { cityChange } from '../../store/other-process/other-process';
+
 
 type CitiesListProps = {
   cities: {name: string; id: number}[];
@@ -21,7 +23,7 @@ const City = ({ name, changeCityName }: CityProps): JSX.Element => (
 function CitiesList({ cities }: CitiesListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const handleCityChange = (city: string) => {
-    dispatch(cityChangs((city)));
+    dispatch(cityChange((city)));
   };
   return (
     <ul className="locations__list tabs__list">
@@ -36,4 +38,5 @@ function CitiesList({ cities }: CitiesListProps): JSX.Element {
   );
 }
 
-export default CitiesList;
+const CitiesListMemo = memo(CitiesList);
+export default CitiesListMemo;

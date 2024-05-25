@@ -10,22 +10,18 @@ import { useParams } from 'react-router-dom';
 import { fetchOfferDataAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import { AuthorizationStatus } from '../../const-information/constant';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { selectCurrentOfferData } from '../../store/selectors';
 
 type OfferProps = {
   favorites: Offers;
-
 }
+
 function Offer({favorites}: OfferProps): JSX.Element {
   const { id } = useParams();
-  const user = useAppSelector((state) => state.AuthorizationStatus);
+  const user = useAppSelector(getAuthorizationStatus);
+  const {offerInfo, nearestOffers, reviews} = useAppSelector(selectCurrentOfferData);
 
-  const { offerInfo, nearestOffers, reviews } = useAppSelector(
-    ({ currentOffer }) => ({
-      offerInfo: currentOffer.offerInfo,
-      nearestOffers: currentOffer.nearestOffers,
-      reviews: currentOffer.reviews,
-    })
-  );
 
   const points: Points = nearestOffers.map((offer) => ({
     id: offer.id,

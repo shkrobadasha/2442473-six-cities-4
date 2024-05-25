@@ -3,16 +3,17 @@
 import {useState} from 'react';
 import { useAppSelector } from '../../hooks';
 import { useAppDispatch } from '../../hooks';
-import { sortingSelection } from '../../store/action';
+import { getSortingOption } from '../../store/other-process/selectors';
+import { sortTypeSelect } from '../../store/other-process/other-process';
 
 function SortingOptions(): JSX.Element{
   const [isOpen, setIsOpen] = useState(false);
 
-  const sortingOptionSelection = useAppSelector((state) => state.sortOption);
+  const sortingOptionSelection = useAppSelector(getSortingOption);
   const dispatch = useAppDispatch();
 
-  const handleSortTypeChange = (sortOption: string) => {
-    dispatch(sortingSelection(sortOption));
+  const handleSortTypeChange = (sortingOption: string) => {
+    dispatch(sortTypeSelect(sortingOption));
   };
 
   return(
