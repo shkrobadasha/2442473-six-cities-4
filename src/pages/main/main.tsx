@@ -7,8 +7,9 @@ import CitiesList from '../../components/list-cities/list-cities';
 import { Cities } from '../../const-information/constant';
 import SortingOptions from '../../components/sorting-options/sorting-options';
 import Header from '../../components/header/header';
-import { getCity } from '../../store/other-process/selectors';
+import { getCity, getError } from '../../store/other-process/selectors';
 import { getOffers } from '../../store/offer-process/selectors';
+import MainEmpty from '../../components/main-empty/main-empty';
 
 type MainScreenProps = {
   favorites: Offers;
@@ -17,6 +18,8 @@ type MainScreenProps = {
 function MainScreen({favorites}: MainScreenProps):JSX.Element{
   const offers = useAppSelector(getOffers);
   const city = useAppSelector(getCity);
+  const error = useAppSelector(getError);
+
 
   const currentCityOffers = useMemo(
     () => offers.filter((offer) => offer.city.name === city),
@@ -34,20 +37,24 @@ function MainScreen({favorites}: MainScreenProps):JSX.Element{
             <CitiesList cities ={Cities} />
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{`${currentCityOffers.length} places to stay in ${city}`}</b>
-              <SortingOptions/>
-              <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
-            </section>
-            <section className="cities__map map">
-              <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers} specialCaseId={undefined}/>
+        {error ? (
+          <MainEmpty city={city} />
+        ) : (
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{`${currentCityOffers.length} places to stay in ${city}`}</b>
+                <SortingOptions/>
+                <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
+              </section>
 
-            </section>
+              <section className="cities__map map">
+                <Map city={currentCityOffers.length > 0 ? currentCityOffers[0].city : offers[0].city} points={currentCityOffers} specialCaseId={undefined}/>
+              </section>
+            </div>
           </div>
-        </div>
+        )}
       </main>
     </div>
   );
