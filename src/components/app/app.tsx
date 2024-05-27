@@ -13,12 +13,14 @@ import { useAppSelector } from '../../hooks';
 import HistoryRouter from '../../browser/history-router/history-router';
 import browserHistory from '../../browser/browser-history/browser-history';
 import LoadingScreen from '../../pages/loading/loading';
-import { getIsOffersDataLoading, getOffers } from '../../store/offer-process/selectors';
+import { getIsOffersDataLoading, getFavorites } from '../../store/offer-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getCity } from '../../store/other-process/selectors';
 
 
 function App(): JSX.Element{
-  const offers: Offers = useAppSelector(getOffers);
+  const favorites: Offers = useAppSelector(getFavorites);
+  const city = useAppSelector(getCity);
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
@@ -28,16 +30,13 @@ function App(): JSX.Element{
       <LoadingScreen/>
     );
   }
-
-  const favourites = offers.filter((o) => o.isFavorite);
-
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<Main favorites = {favourites}/>}
+            element={<Main favorites = {favorites} city={city}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -49,13 +48,13 @@ function App(): JSX.Element{
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <Favorites favoriteOffers = {favourites} />
+                <Favorites favoriteOffers = {favorites} />
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer favorites={favourites}/>}
+            element={<Offer favorites={favorites}/>}
           />
           <Route
             path="*"

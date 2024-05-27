@@ -12,9 +12,12 @@ import { AuthData } from '../types/auth-data.ts';
 import { store } from './index.ts';
 import { Review, Reviews } from '../types/review.ts';
 import { CommentData } from '../types/comment-data.ts';
-import { loadOfferData, loadOffers, sendReview, setOffersDataLoadingStatus } from './offer-process/offer-process.ts';
-import { requireAuthorization, saveUserEmail } from './user-process/user-process.ts';
+import { loadFavorites, loadOfferData, loadOffers, sendReview, setOffersDataLoadingStatus, updateOffers } from './offer-process/offer-process.ts';
+import { requireAuthorization} from './user-process/user-process.ts';
 import { setError } from './other-process/other-process.ts';
+import { CheckButton } from '../types/check-buttons.ts';
+import { dropLogin, saveLogin } from '../service/login-util.ts';
+import { dropAvatar, saveAvatar } from '../service/avatar.ts';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -69,6 +72,30 @@ export const fetchOfferDataAction = createAsyncThunk<
   dispatch(loadOfferData({ offerInfo, nearestOffers, reviews }));
 });
 
+export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'fetchFavorites',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer[]>(`${APIRoute.Favorite}`);
+    dispatch(loadFavorites(data));
+  },
+);
+
+export const changeFavouriteStatusAction = createAsyncThunk<void, CheckButton, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'changeFavoriteStatus',
+    async ({status, offerId}, {extra: api, dispatch}) => {
+      const {data} = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${status}`);
+      dispatch(updateOffers(data));
+      dispatch(fetchFavoritesAction());
+    },
+  );
 
 export const loginAction = createAsyncThunk<void, AuthData, {
   dispatch: AppDispatch;
@@ -79,9 +106,13 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: login, password}, {dispatch, extra: api}) => {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {login, password});
     saveToken(token);
-    dispatch(saveUserEmail(login));
+    saveLogin(login);
+    dispatch(fetchOffersAction());
+    dispatch(fetchFavoritesAction());
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
+    const {data } = await api.get<UserData>(APIRoute.Login);
+    saveAvatar(data.avatar);
 
   },
 );
@@ -95,6 +126,8 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+    dropLogin();
+    dropAvatar();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );

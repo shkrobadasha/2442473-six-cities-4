@@ -7,17 +7,17 @@ import CitiesList from '../../components/list-cities/list-cities';
 import { Cities } from '../../const-information/constant';
 import SortingOptions from '../../components/sorting-options/sorting-options';
 import Header from '../../components/header/header';
-import { getCity, getError } from '../../store/other-process/selectors';
+import { getError } from '../../store/other-process/selectors';
 import { getOffers } from '../../store/offer-process/selectors';
 import MainEmpty from '../../components/main-empty/main-empty';
 
 type MainScreenProps = {
   favorites: Offers;
+  city: string;
 }
 
-function MainScreen({favorites}: MainScreenProps):JSX.Element{
+function MainScreen({favorites, city}: MainScreenProps):JSX.Element{
   const offers = useAppSelector(getOffers);
-  const city = useAppSelector(getCity);
   const error = useAppSelector(getError);
 
 

@@ -6,10 +6,12 @@ import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-message';
 
 import {store} from './store/index';
-import { checkAuthAction, fetchOffersAction } from './store/api-actions';
+import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from './store/api-actions';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
+store.dispatch(fetchFavoritesAction());
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
