@@ -3,7 +3,8 @@ import Logo from '../../components/logo/logo';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute } from '../../const-information/constant';
+import { AppRoute, Cities} from '../../const-information/constant';
+import { cityChange } from '../../store/other-process/other-process';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -22,6 +23,13 @@ function Login(): JSX.Element {
       }));
     }
     navigate('/');
+  };
+
+  const getRandomCity = () => Cities[Math.floor(Math.random() * Cities.length)].name;
+
+  const newCityName = getRandomCity();
+  const handleCityClick = () => {
+    dispatch(cityChange(newCityName));
   };
 
   return (
@@ -54,8 +62,8 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to= {AppRoute.Main} className="locations__item-link">
-                <span>Amsterdam</span>
+              <Link to= {AppRoute.Main} className="locations__item-link" onClick={handleCityClick}>
+                <span>{newCityName}</span>
               </Link>
             </div>
           </section>

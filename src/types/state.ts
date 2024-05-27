@@ -9,7 +9,7 @@ export type AppDispatch = typeof store.dispatch;
 
 export type UserState = {
   authorizationStatus: AuthorizationStatus;
-  userEmail: string | null;
+  userLogin: string | null;
 };
 
 export type OffersState = {
@@ -23,6 +23,7 @@ export type OffersState = {
     id: string;
   } | null;
   isOffersDataLoading: boolean;
+  favorites: Offers;
 };
 
 export type OtherState = {

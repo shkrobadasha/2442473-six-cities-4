@@ -4,6 +4,7 @@ import {OffersState} from '../../types/state.ts';
 import { NameSpace } from '../../const-information/constant.ts';
 import {OfferData} from '../../types/offer-data.ts';
 import { Review } from '../../types/review.ts';
+import { updateOffer } from '../../util.ts';
 
 
 const initialState: OffersState = {
@@ -12,6 +13,7 @@ const initialState: OffersState = {
     nearestOffers: [],
     reviews: [],
   },
+  favorites: [],
   offers: [],
   selectPoint: null,
   isOffersDataLoading: false,
@@ -37,6 +39,12 @@ export const offersProcess = createSlice({
     highlightMarker(state, action: PayloadAction<{ id: string } | null>) {
       state.selectPoint = action.payload;
     },
+    updateOffers: (state, action: PayloadAction<Offer>) => {
+      updateOffer(state.offers, action.payload);
+    },
+    loadFavorites(state, action: PayloadAction<Offer[]>){
+      state.favorites = action.payload;
+    },
   },
 });
-export const {loadOffers, setOffersDataLoadingStatus, loadOfferData, sendReview, highlightMarker} = offersProcess.actions;
+export const {loadOffers, setOffersDataLoadingStatus, loadOfferData, sendReview, highlightMarker,updateOffers, loadFavorites} = offersProcess.actions;

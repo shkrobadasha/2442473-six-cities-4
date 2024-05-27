@@ -1,7 +1,7 @@
+import AddToFavouritesButton from '../../add-to-favorites/add-to-favorites';
 import { useAppDispatch } from '../../hooks';
 import { highlightMarker } from '../../store/offer-process/offer-process';
 
-//import { selectAndMarkerPoint } from '../../store/action';
 import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 
@@ -25,9 +25,7 @@ function PlaceCard({offer, typeOfCard}:OfferInfo): JSX.Element {
             <span>Premium</span>
           </div>)}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
-            <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
-          </a>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -35,23 +33,16 @@ function PlaceCard({offer, typeOfCard}:OfferInfo): JSX.Element {
               <b className ="place-card__price-value">&euro;{offer.price}</b>
               <span className ="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <div>
-              {offer.isFavorite ? (
-                <button className ="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                  <svg className="place-card__bookmark-icon" width="18" height="19">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">In bookmarks</span>
-                </button>
-              ) : (
-                <button className="place-card__bookmark-button button" type="button">
-                  <svg className="place-card__bookmark-icon" width="18" height="19">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
-              )}
-            </div>
+            <AddToFavouritesButton
+              id={offer.id}
+              isFavorite={offer.isFavorite}
+              width='18'
+              heigth='19'
+              buttonClass="place-card__bookmark-button"
+              activeClass="place-card__bookmark-button--active"
+              iconClass="place-card__bookmark-icon"
+              buttonText="In bookmarks"
+            />
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">

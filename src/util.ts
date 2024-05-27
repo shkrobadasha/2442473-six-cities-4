@@ -1,4 +1,4 @@
-import {Offers} from './types/offer';
+import {Offer, Offers} from './types/offer';
 
 export const sortingFunction = (offers: Offers, sortingOption: string): Offers | undefined => {
   const offersForSorting = offers.slice();
@@ -11,6 +11,14 @@ export const sortingFunction = (offers: Offers, sortingOption: string): Offers |
       return offersForSorting.sort((a, b) => b.price - a.price);
     case 'Top rated first':
       return offersForSorting.sort((a, b) => b.rating - a.rating);
+  }
+};
+
+
+export const updateOffer = (offers: Offers, updatedOffer: Offer) => {
+  const offerIndex = offers.findIndex((el) => el.id === updatedOffer.id);
+  if (offerIndex !== -1) {
+    offers[offerIndex] = updatedOffer;
   }
 };
 

@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { AuthorizationStatus } from '../../const-information/constant';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { selectCurrentOfferData } from '../../store/selectors';
+import AddToFavouritesButton from '../../add-to-favorites/add-to-favorites';
 
 type OfferProps = {
   favorites: Offers;
@@ -68,12 +69,16 @@ function Offer({favorites}: OfferProps): JSX.Element {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offerInfo.title}</h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <AddToFavouritesButton
+                  id={offerInfo.id}
+                  isFavorite={offerInfo.isFavorite}
+                  width='31'
+                  heigth='33'
+                  buttonClass="place-card__bookmark-button"
+                  activeClass="place-card__bookmark-button--active"
+                  iconClass="place-card__bookmark-icon"
+                  buttonText="In bookmarks"
+                />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -136,7 +141,6 @@ function Offer({favorites}: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-
           <section className="offer__map map">
             <Map city={nearestOffers[0].city} points={mapPoints} specialCaseId={offerInfo.id}/>
           </section>
