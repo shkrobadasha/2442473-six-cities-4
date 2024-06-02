@@ -40,13 +40,13 @@ function App(): JSX.Element{
           />
           <Route
             path={AppRoute.Login}
-            element={<Login />}
+            element={<Login/>}
           />
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               >
                 <Favorites favoriteOffers = {favorites} />
               </PrivateRoute>
@@ -58,7 +58,7 @@ function App(): JSX.Element{
           />
           <Route
             path="*"
-            element={<NotFoundScreen />}
+            element={<NotFoundScreen/>}
           />
         </Routes>
       </HistoryRouter>

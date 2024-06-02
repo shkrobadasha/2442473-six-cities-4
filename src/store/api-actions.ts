@@ -29,7 +29,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));//помещает наши данные в хранилище
+    dispatch(loadOffers(data));
   },
 );
 

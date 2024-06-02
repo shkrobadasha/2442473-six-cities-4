@@ -1,17 +1,23 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
-import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { Link, useNavigate} from 'react-router-dom';
+import { FormEvent, useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, Cities} from '../../const-information/constant';
+import {AuthorizationStatus, Cities} from '../../const-information/constant';
 import { cityChange } from '../../store/other-process/other-process';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate('/');
+    }
+  });
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -38,7 +44,9 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo/>
+              <a className="header__logo-link" href="/">
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+              </a>
             </div>
           </div>
         </div>
@@ -62,7 +70,7 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to= {AppRoute.Main} className="locations__item-link" onClick={handleCityClick}>
+              <Link to = '/' className="locations__item-link" onClick={handleCityClick}>
                 <span>{newCityName}</span>
               </Link>
             </div>
