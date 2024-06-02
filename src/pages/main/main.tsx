@@ -46,7 +46,7 @@ function MainScreen({favorites, city}: MainScreenProps):JSX.Element{
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{`${currentCityOffers.length} places to stay in ${city}`}</b>
                 <SortingOptions/>
-                <PlacesCardList offers={currentCityOffers} typeOfList={'defoult'}/>
+                <PlacesCardList offers={currentCityOffers} typeOfList={'typical'}/>
               </section>
 
               <section className="cities__map map">

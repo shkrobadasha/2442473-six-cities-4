@@ -7,14 +7,16 @@ import { getSortingOption } from '../../store/other-process/selectors';
 
 type PlaceCardList = {
   offers: Offers;
-  typeOfList: 'nearest' | 'defoult';
+  typeOfList: 'typical' | 'near';
 };
 
 function PlacesCardList({offers, typeOfList}: PlaceCardList): JSX.Element {
   const currnetSortOptions = useAppSelector(getSortingOption);
 
   return (
-    <div className={`${typeOfList === 'nearest' ? 'near-places__list places__list' : 'cities__places-list places__list tabs__content'}`}>
+    <div
+      className={`${typeOfList === 'typical' ? 'cities__places-list places__list tabs__content' : 'near-places__list places__list'}`}
+    >
       {sortingFunction(offers, currnetSortOptions)?.map((offer) => (
         <PlaceCard key={offer.id} offer={offer} typeOfCard = {typeOfList}/>
       ))}

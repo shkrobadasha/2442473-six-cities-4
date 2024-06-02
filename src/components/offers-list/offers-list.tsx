@@ -14,7 +14,7 @@ function ListOffers({city, offers}: ListOffersProps): JSX.Element {
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{`${offers.length} places to stay in ${city}`}</b>
       <SortingOptions/>
-      <PlacesCardListMemo offers={offers} typeOfList = {'defoult'}/>
+      <PlacesCardListMemo offers={offers} typeOfList = {'typical'}/>
     </section>
   );
 }

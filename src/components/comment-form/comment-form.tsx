@@ -22,14 +22,14 @@ function CommentForm({ id }: CommentProps) {
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormState((prevState) => ({
       ...prevState,
-      comment: e.currentTarget.value,
+      comment: e.target.value,
     }));
   };
 
   const handleRatingChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormState((prevState) => ({
       ...prevState,
-      rating: e.currentTarget.value,
+      rating: e.target.value,
     }));
   };
   const isValid = () =>
@@ -172,7 +172,7 @@ function CommentForm({ id }: CommentProps) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled = {!isValid}
+          disabled = {!isValid()}
         >
           Submit
         </button>

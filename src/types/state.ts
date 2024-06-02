@@ -1,7 +1,7 @@
-import { AuthorizationStatus } from '../const-information/constant.js';
-import {store} from '../store/index.js';
-import { FullOffer, Offers } from './offer.js';
-import { Reviews } from './review.js';
+import { AuthorizationStatus } from '../const-information/constant';
+import {store} from '../store';
+import { FullOffer, Offers } from './offer';
+import { Reviews } from './review';
 
 export type State = ReturnType<typeof store.getState>;
 

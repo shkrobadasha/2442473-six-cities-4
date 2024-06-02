@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
-import { APIRoute, AuthorizationStatus, FavouriteStatus } from '../const-information/constant';
-import { getAuthorizationStatus } from '../store/user-process/selectors';
-import { changeFavouriteStatusAction } from '../store/api-actions';
+import { APIRoute, AuthorizationStatus, FavouriteStatus } from '../../const-information/constant';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { changeFavouriteStatusAction } from '../../store/api-actions';
 
 type AddToFavouritesProps = {
   isFavorite: boolean;

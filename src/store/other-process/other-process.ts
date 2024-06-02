@@ -25,3 +25,4 @@ export const otherProcess = createSlice({
 });
 
 export const { cityChange, sortTypeSelect, setError } = otherProcess.actions;
+

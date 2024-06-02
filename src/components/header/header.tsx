@@ -3,7 +3,7 @@ import {Offers} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
 import { AppRoute, AuthorizationStatus } from '../../const-information/constant.ts';
 import { logoutAction } from '../../store/api-actions.ts';
-//import Logo from '../logo/logo.tsx';
+import Logo from '../logo/logo.tsx';
 import { getAuthorizationStatus} from '../../store/user-process/selectors.ts';
 import { getLogin } from '../../service/login-util.ts';
 import { getAvatar } from '../../service/avatar.ts';
@@ -27,9 +27,7 @@ function Header({favorites}: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link to="/" className="header__logo-link header__logo-link--active">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width='81' height='41'/>
-            </Link>
+            <Logo/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

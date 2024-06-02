@@ -1,25 +1,19 @@
-import { Link, useNavigate} from 'react-router-dom';
-import { FormEvent, useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Link} from 'react-router-dom';
+import { useRef } from 'react';
+import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import {AuthorizationStatus, Cities} from '../../const-information/constant';
+import {Cities} from '../../const-information/constant';
 import { cityChange } from '../../store/other-process/other-process';
+import Logo from '../../components/logo/logo';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      navigate('/');
-    }
-  });
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
@@ -28,7 +22,7 @@ function Login(): JSX.Element {
         password: passwordRef.current.value
       }));
     }
-    navigate('/');
+    //navigate('/');
   };
 
   const getRandomCity = () => Cities[Math.floor(Math.random() * Cities.length)].name;
@@ -44,9 +38,7 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="/">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              <Logo/>
             </div>
           </div>
         </div>
