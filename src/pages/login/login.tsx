@@ -1,19 +1,19 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
-import { FormEvent, useRef } from 'react';
+import { Link} from 'react-router-dom';
+import { useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, Cities} from '../../const-information/constant';
+import {Cities} from '../../const-information/constant';
 import { cityChange } from '../../store/other-process/other-process';
+import Logo from '../../components/logo/logo';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
@@ -22,7 +22,7 @@ function Login(): JSX.Element {
         password: passwordRef.current.value
       }));
     }
-    navigate('/');
+    //navigate('/');
   };
 
   const getRandomCity = () => Cities[Math.floor(Math.random() * Cities.length)].name;
@@ -62,7 +62,7 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to= {AppRoute.Main} className="locations__item-link" onClick={handleCityClick}>
+              <Link to = '/' className="locations__item-link" onClick={handleCityClick}>
                 <span>{newCityName}</span>
               </Link>
             </div>

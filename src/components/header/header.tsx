@@ -27,9 +27,7 @@ function Header({favorites}: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link to="/" className="header__logo-link header__logo-link--active">
-              <Logo/>
-            </Link>
+            <Logo/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
@@ -61,7 +59,7 @@ function Header({favorites}: HeaderProps): JSX.Element {
               </li>
               {user === AuthorizationStatus.Auth && (
                 <li className="header__nav-item">
-                  <Link to="/login" className="header__nav-link" onClick={handleSignOut}>
+                  <Link to={AppRoute.Login} className="header__nav-link" onClick={handleSignOut}>
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>

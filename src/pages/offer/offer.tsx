@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { AuthorizationStatus } from '../../const-information/constant';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { selectCurrentOfferData } from '../../store/selectors';
-import AddToFavouritesButton from '../../add-to-favorites/add-to-favorites';
+import AddToFavouritesButton from '../../components/add-to-favorites/add-to-favorites';
 
 type OfferProps = {
   favorites: Offers;
@@ -148,7 +148,7 @@ function Offer({favorites}: OfferProps): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCard offers = {nearestOffers.slice(0, 3)} typeOfList={'defoult'}/>
+            <PlaceCard offers = {nearestOffers.slice(0, 3)} typeOfList={'typical'}/>
           </section>
         </div>
       </main>

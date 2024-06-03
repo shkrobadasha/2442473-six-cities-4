@@ -29,7 +29,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));//помещает наши данные в хранилище
+    dispatch(loadOffers(data));
   },
 );
 
@@ -97,32 +97,12 @@ export const changeFavouriteStatusAction = createAsyncThunk<void, CheckButton, {
     },
   );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'user/login',
-  async ({login: login, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {login, password});
-    saveToken(token);
-    saveLogin(login);
-    dispatch(fetchOffersAction());
-    dispatch(fetchFavoritesAction());
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(redirectToRoute(AppRoute.Main));
-    const {data } = await api.get<UserData>(APIRoute.Login);
-    saveAvatar(data.avatar);
-
-  },
-);
-
 export const logoutAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'six-cities/login',
+  'logout',
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
@@ -163,3 +143,23 @@ export const sendCommentAction = createAsyncThunk<
   );
   dispatch(sendReview(review));
 });
+
+export const loginAction = createAsyncThunk<void, AuthData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'login',
+  async ({login: email, password}, {dispatch, extra: api}) => {
+    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(token);
+    saveLogin(email);
+    dispatch(fetchOffersAction());
+    dispatch(fetchFavoritesAction());
+    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
+    const {data } = await api.get<UserData>(APIRoute.Login);
+    saveAvatar(data.avatar);
+
+  },
+);
