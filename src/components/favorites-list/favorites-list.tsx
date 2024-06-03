@@ -27,7 +27,7 @@ function ListFavorites({favorites}: ListFavoritesProps): JSX.Element {
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {Object.keys(favoritesMap).map((city) => (
-          <li className="favorites__locations-items" key={city}>
+          <li className="favorites__locations-items" key={city} data-testid={city}>
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
                 <Link to="/" className="locations__item-link" onClick={() => handleCityClick(city)}>
