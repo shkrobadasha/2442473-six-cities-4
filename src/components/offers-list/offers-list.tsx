@@ -1,5 +1,5 @@
 import { Offers } from '../../types/offer';
-import PlacesCardListMemo from '../place-card-list/place-card-list';
+import PlacesCardListMemo from '../place-cards/place-card-list';
 import SortingOptions from '../sorting-options/sorting-options';
 
 type ListOffersProps = {

@@ -8,6 +8,8 @@ test('checking the functionality of the registration fields', async ({ page }) =
   await page.fill('input[name="email"]', 'dary@mail');
   await page.fill('input[name="password"]', 'ldhs23');
   await page.click('button[type="submit"]');
+  await page.waitForTimeout(2000);
+
 
   // Проверка,что остались на странице
   await expect(page).toHaveURL('http://localhost:5173/login');

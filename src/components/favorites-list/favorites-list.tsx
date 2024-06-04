@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { cityChange } from '../../store/other-process/other-process';
 import { Offers, Offer } from '../../types/offer';
-import PlaceCard from '../place-card/place-card';
+import PlaceCard from '../place-cards/place-card';
 
 type ListFavoritesProps = {
   favorites: Offers;
