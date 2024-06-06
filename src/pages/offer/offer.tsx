@@ -1,8 +1,7 @@
 //поправить поиск ближайших
 import CommentForm from '../../components/comment-form/comment-form';
-import ReviewsList from '../../components/review-list/review-list';
+import ReviewsList from '../../components/reviews/review-list';
 import Map from '../../components/map/map';
-import PlaceCard from '../../components/place-card-list/place-card-list';
 import { Offers, Points } from '../../types/offer';
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -13,6 +12,8 @@ import { AuthorizationStatus } from '../../const-information/constant';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { selectCurrentOfferData } from '../../store/selectors';
 import AddToFavouritesButton from '../../components/add-to-favorites/add-to-favorites';
+import PlacesCardList from '../../components/place-cards/place-card-list';
+import NotFoundScreen from '../not-found/not-found';
 
 type OfferProps = {
   favorites: Offers;
@@ -42,8 +43,13 @@ function Offer({favorites}: OfferProps): JSX.Element {
   useEffect(() => {
     dispatch(fetchOfferDataAction({ id: id ?? '' }));
   }, [dispatch, id]);
+
   if (!offerInfo) {
-    return <div className="container">Loading</div>;
+    return (
+      <div className="container">
+        <NotFoundScreen/>
+      </div>
+    );
   }
 
   return (
@@ -148,7 +154,7 @@ function Offer({favorites}: OfferProps): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCard offers = {nearestOffers.slice(0, 3)} typeOfList={'typical'}/>
+            <PlacesCardList offers = {nearestOffers.slice(0, 3)} typeOfList={'typical'}/>
           </section>
         </div>
       </main>

@@ -159,7 +159,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
     const {data } = await api.get<UserData>(APIRoute.Login);
-    saveAvatar(data.avatar);
+    saveAvatar(data.avatarUrl);
 
   },
 );

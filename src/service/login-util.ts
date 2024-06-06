@@ -9,7 +9,6 @@ export const getLogin = (): string => {
   return token ?? '';
 };
 
-
 export const dropLogin = (): void => {
   localStorage.removeItem(LOGIN_KEY_NAME);
 };
